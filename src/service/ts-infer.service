@@ -1,0 +1,16 @@
+[Unit]
+Description=ts-team4 inference service (every minute, MQTT + HTTP :8425)
+After=network-online.target ts-collector.service
+Wants=network-online.target
+
+[Service]
+User=prettygeun
+WorkingDirectory=/home/prettygeun/ts-data
+ExecStart=/home/prettygeun/ts-venv/bin/python -u service.py
+Restart=always
+RestartSec=5
+StandardOutput=append:/home/prettygeun/ts-data/service.log
+StandardError=append:/home/prettygeun/ts-data/service.log
+
+[Install]
+WantedBy=multi-user.target

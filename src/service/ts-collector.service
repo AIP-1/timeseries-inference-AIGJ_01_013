@@ -1,0 +1,16 @@
+[Unit]
+Description=ts-team4 collector (MQTT -> ~/ts-data/live.db)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=prettygeun
+WorkingDirectory=/home/prettygeun/ts-data
+ExecStart=/home/prettygeun/ts-venv/bin/python -u collector.py
+Restart=always
+RestartSec=5
+StandardOutput=append:/home/prettygeun/ts-data/collector.log
+StandardError=append:/home/prettygeun/ts-data/collector.log
+
+[Install]
+WantedBy=multi-user.target
